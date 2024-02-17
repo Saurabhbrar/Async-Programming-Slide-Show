@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        body{
+            background-color:#c3a9ff;
+        }
+        div{
+            display: flex;
+            background-color: bisque;
+            box-shadow: 0px 0px 5px;
+            margin: auto;
+            height: 500px;
+            width: 80%;
+            margin-top: 50px;
+        }
+
+        img{
+            margin: auto;
+            height: 100%;
+            width: 100%;
+            transition: opacity 0.1s ease;
+        }
+        button{
+            background-color: #00008b;
+            color: #ffff00;
+            font-size: 20px;
+        }
+        h1{
+            color:#00008b;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button id="prev"><</button>
+        <img src="" alt="">
+        <button id="next">></button>
+    </div>
+    <h1>Slider By Saurabh Brar</h1>
+
+    <script>
+        let imageArr = [
+            "https:picsum.photos/id/237/1000/450",
+            "https:picsum.photos/id/238/1000/450",
+            "https:picsum.photos/id/239/1000/450",
+            "https:picsum.photos/id/240/1000/450",
+            "https:picsum.photos/id/241/1000/450",
+            "https:picsum.photos/id/242/1000/450",
+            "https:picsum.photos/id/243/1000/450",
+            "https:picsum.photos/id/244/1000/450",
+            "https:picsum.photos/id/265/1000/450",
+            "https:picsum.photos/id/264/1000/450",
+            "https:picsum.photos/id/265/1000/450",
+            "https:picsum.photos/id/266/1000/450",
+            "https:picsum.photos/id/267/1000/450",
+            "https:picsum.photos/id/268/1000/450",
+            "https:picsum.photos/id/269/1000/450",
+            "https:picsum.photos/id/252/1000/450",
+            "https:picsum.photos/id/253/1000/450",
+            "https:picsum.photos/id/254/1000/450",
+            "https:picsum.photos/id/255/1000/450",
+            "https:picsum.photos/id/256/1000/450",
+            "https:picsum.photos/id/257/1000/450"
+        ];
+        let img = document.querySelector('img');
+        img.setAttribute('src', imageArr[0]);
+        let currentImage = 0;
+        let nextBtn = document.getElementById('next');
+        let prevBtn = document.getElementById('prev');
+        let intervalId; 
+
+        function showNextImage() {
+            clearInterval(intervalId); 
+            currentImage++;
+            if (currentImage >= imageArr.length) {
+                currentImage = 0;
+            }
+            img.setAttribute('src', imageArr[currentImage]);
+            startSlider();  
+        }
+
+        function showPrevImage() {
+            clearInterval(intervalId); 
+            currentImage--;
+            if (currentImage < 0) {
+                currentImage = imageArr.length - 1;
+            }
+            img.setAttribute('src', imageArr[currentImage]);
+            startSlider();
+        }
+
+        nextBtn.addEventListener('click', function() {
+            showNextImage();
+            clearInterval(intervalId); 
+        });
+
+        prevBtn.addEventListener('click', function() {
+            showPrevImage();
+            clearInterval(intervalId); 
+        });
+
+        startSlider();
+
+        function startSlider() {
+            intervalId = setInterval(showNextImage, 5000);  
+        }
+    </script>
+</body>
+</html>
